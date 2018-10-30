@@ -2,14 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": "elkstorage1",
-      "metadata": {
-        "description": "Name of storage account"
-      }
-    },
-    "adminUsername": {
+      "adminUsername": {
       "type": "string",
       "defaultValue": "elkadmin",
       "metadata": {
@@ -95,6 +88,7 @@
     }
   },
   "variables": {
+    "storageAccountName":"[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
     "storageAccountType": "Standard_LRS",
     "availabilitySetName": "elkAvSet",
     "addressPrefix": "10.0.0.0/16",
@@ -112,7 +106,7 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageAccountName')]",
+      "name": "[variables('storageAccountName')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "properties": {
