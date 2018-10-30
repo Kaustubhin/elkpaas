@@ -98,10 +98,8 @@
     "storageAccountType": "Standard_LRS",
     "availabilitySetName": "myAvSet",
     "addressPrefix": "10.0.0.0/16",
-    "subnetNamePub": "Subnet-pub",
-    "subnetPrefixPub": "10.0.1.0/24",
-    "subnetNamePri": "Subnet-pri",
-    "subnetPrefixPri": "10.0.2.0/24",
+    "subnetName": "Subnet",
+    "subnetPrefix": "10.0.1.0/24",
     "publicIPAddressType": "Dynamic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables ('subnetNamePub'), variables ('subnetNamePri'))]",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
@@ -157,18 +155,11 @@
         },
         "subnets": [
           {
-            "name": "[variables('subnetNamePub')]",
+            "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "[variables('subnetPrefixPub')]"
+              "addressPrefix": "[variables('subnetPrefix')]"
             }
-          },
-          {
-            "name": "[variables('subnetNamePri')]",
-            "properties": {
-            "addressPrefix": "[variables('subnetPrefixPri')]"
-                }
-            }
-          
+          }     
         ]
       }
     },
