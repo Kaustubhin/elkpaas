@@ -288,7 +288,7 @@
       },
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', variable('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
@@ -325,7 +325,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "true",
-            "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
+            "storageUri": "[concat('http://',variable('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
       }
