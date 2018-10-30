@@ -4,7 +4,7 @@
   "parameters": {
     "storageAccountName": {
       "type": "string",
-      "defaultValue": "elkstorage",
+      "defaultValue": "elkstorage1",
       "metadata": {
         "description": "Name of storage account"
       }
@@ -96,7 +96,7 @@
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
-    "availabilitySetName": "myAvSet",
+    "availabilitySetName": "elkAvSet",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.1.0/24",
