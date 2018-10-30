@@ -2,18 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-<<<<<<< HEAD
       "adminUsername": {
-=======
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": "elkstorageko",
-      "metadata": {
-        "description": "Name of storage account"
-      }
-    },
-    "adminUsername": {
->>>>>>> 121c209cea349507306531002f6f7dc151858456
       "type": "string",
       "defaultValue": "elkadmin",
       "metadata": {
