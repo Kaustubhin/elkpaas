@@ -281,7 +281,8 @@
     {
       "apiVersion": "2016-01-01",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNamePrefix'), copyindex())]",
+      "vmCount": 2,
+      "name": "[(parameters('vmNamePrefix'))]",
       "copy": {
         "name": "virtualMachineLoop",
         "count": "[variables('numberOfInstances')]"
@@ -289,7 +290,7 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variable('storageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'))]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
       "properties": {
