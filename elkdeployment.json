@@ -23,15 +23,9 @@
         "description": "DNS for Load Balancer IP"
       }
     },
-    "virtualMachineCount": {
-      "type": "int",
-      "defaultValue": 3,
-      "metadata": {
-        "description": "Number of  virtual machines to be created"
-      },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "elkVM0",
+      "defaultValue": "elkVM",
       "metadata": {
         "description": "Prefix to use for VM names"
       }
@@ -103,6 +97,7 @@
     "publicIPAddressType": "Dynamic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables ('subnetName'))]",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
+    "numberOfInstances": 2,
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
     "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
     "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
@@ -286,15 +281,15 @@
     {
       "apiVersion": "2016-04-30-preview",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNamePrefix'), copyindex(1))]",
+      "name": "[concat(parameters('vmNamePrefix'), copyindex())]",
       "copy": {
         "name": "virtualMachineLoop",
-        "count": "[parameters('virtualMachineCount')]"
+        "count": "[variables('numberOfInstances')]"
       },
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variable('storageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex(1))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
       "properties": {
@@ -305,7 +300,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[concat(parameters('vmNamePrefix'), copyIndex(1))]",
+          "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
