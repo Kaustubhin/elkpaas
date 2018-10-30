@@ -31,7 +31,7 @@
       },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "elkVM",
+      "defaultValue": "elkVM0",
       "metadata": {
         "description": "Prefix to use for VM names"
       }
