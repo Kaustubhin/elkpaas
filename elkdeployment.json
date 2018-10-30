@@ -4,7 +4,7 @@
   "parameters": {
     "storageAccountName": {
       "type": "string",
-      "defaultValue": "elkstorage1",
+      "defaultValue": "elkstorageko",
       "metadata": {
         "description": "Name of storage account"
       }
