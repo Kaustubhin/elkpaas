@@ -4,7 +4,7 @@
   "parameters": {
     "storageAccountName": {
       "type": "string",
-      "value": "koelkstoageaccount",
+      "value": "koelkteststorageaccount",
       "metadata": {
         "description": "Name of storage account"
       }
