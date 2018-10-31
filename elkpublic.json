@@ -4,7 +4,6 @@
   "parameters": {
     "storageAccountName": {
       "type": "string",
-      "value": "koelkteststorageaccount",
       "metadata": {
         "description": "Name of storage account"
       }
@@ -23,14 +22,13 @@
     },
     "dnsNameforLBIP": {
       "type": "string",
-      "value": "elkpublb",
       "metadata": {
         "description": "DNS for Load Balancer IP"
       }
     },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "myVM",
+      "defaultValue": "elkVM",
       "metadata": {
         "description": "Prefix to use for VM names"
       }
@@ -58,7 +56,7 @@
     },
     "lbName": {
       "type": "string",
-      "defaultValue": "myLB",
+      "defaultValue": "elkLB",
       "metadata": {
         "description": "Load Balancer name"
       }
@@ -72,14 +70,14 @@
     },
     "publicIPAddressName": {
       "type": "string",
-      "defaultValue": "myPublicIP",
+      "defaultValue": "elkPublicIP",
       "metadata": {
         "description": "Public IP Name"
       }
     },
     "vnetName": {
       "type": "string",
-      "defaultValue": "myVNET",
+      "defaultValue": "elkVNET",
       "metadata": {
         "description": "VNET name"
       }
