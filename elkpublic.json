@@ -4,7 +4,6 @@
   "parameters": {
     "storageAccountName": {
       "type": "string",
-      "value": "koelkteststorageaccount",
       "metadata": {
         "description": "Name of storage account"
       }
@@ -23,7 +22,6 @@
     },
     "dnsNameforLBIP": {
       "type": "string",
-      "value": "elkpublb",
       "metadata": {
         "description": "DNS for Load Balancer IP"
       }
