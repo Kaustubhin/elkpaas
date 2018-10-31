@@ -2,13 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "storageAccountName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of storage account"
-      }
-    },
-    "adminUsername": {
+      "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "Admin username"
@@ -92,6 +86,7 @@
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
+    "storageAccountName": "[uniqueString(resourceGroup().id)]",
     "availabilitySetName": "myAvSet",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet-1",
