@@ -30,7 +30,6 @@
     }
   },
   "variables": {
-    "availabilitySetName": "elkAvSet",
     "storageAccountType": "Standard_LRS",
     "storageAccountName": "[uniqueString(resourceGroup().id)]",
     "virtualNetworkName": "vNet",
