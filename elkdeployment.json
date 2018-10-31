@@ -16,7 +16,7 @@
     },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "elkVM",
+      "defaultValue": "BackendVM",
       "metadata": {
         "description": "Prefix to use for VM names"
       }
@@ -30,8 +30,10 @@
     }
   },
   "variables": {
+    "availabilitySetName": "AvSet",
     "storageAccountType": "Standard_LRS",
     "storageAccountName": "[uniqueString(resourceGroup().id)]",
+    "publicIPAddressType": "Dynamic",
     "virtualNetworkName": "vNet",
     "subnetName": "backendSubnet",
     "loadBalancerName": "ilb",
@@ -123,7 +125,8 @@
       "name": "[variables('loadBalancerName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('virtualNetworkName')]"
+        "[variables('virtualNetworkName')]",
+        "[variables('publicIPAddressType)]"
       ],
       "properties": {
         "frontendIPConfigurations": [
@@ -195,7 +198,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
         },
         "hardwareProfile": {
-          "vmSize": "Standard_B1ms"
+          "vmSize": "Standard_DS2_V2"
         },
         "osProfile": {
           "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
