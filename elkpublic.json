@@ -2,7 +2,14 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-      "adminUsername": {
+    "storageAccountName": {
+      "type": "string",
+      "value": "koelkstoageaccount",
+      "metadata": {
+        "description": "Name of storage account"
+      }
+    },
+    "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "Admin username"
@@ -86,7 +93,6 @@
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
-    "storageAccountName": "[uniqueString(resourceGroup().id)]",
     "availabilitySetName": "myAvSet",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet-1",
@@ -103,8 +109,8 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variable('storageAccountName')]",
-      "apiVersion": "2018-04-01",
+      "name": "[parameters('storageAccountName')]",
+      "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
@@ -113,7 +119,7 @@
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('availabilitySetName')]",
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2016-04-30-preview",
       "location": "[resourceGroup().location]",
       "properties": {
         "platformFaultDomainCount": 2,
@@ -122,7 +128,7 @@
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
@@ -134,7 +140,7 @@
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[parameters('vnetName')]",
       "location": "[resourceGroup().location]",
@@ -155,7 +161,7 @@
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(parameters('nicNamePrefix'), copyindex())]",
       "location": "[resourceGroup().location]",
@@ -192,7 +198,7 @@
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2015-05-01-preview",
       "name": "[parameters('lbName')]",
       "type": "Microsoft.Network/loadBalancers",
       "location": "[resourceGroup().location]",
@@ -276,7 +282,7 @@
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2016-04-30-preview",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('vmNamePrefix'), copyindex())]",
       "copy": {
@@ -285,7 +291,7 @@
       },
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variable('storageAccountName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
@@ -322,7 +328,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "true",
-            "storageUri": "[concat('http://',variable('storageAccountName'),'.blob.core.windows.net')]"
+            "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
       }
