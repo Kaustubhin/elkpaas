@@ -23,6 +23,7 @@
     },
     "dnsNameforLBIP": {
       "type": "string",
+      "value": "elkpublb",
       "metadata": {
         "description": "DNS for Load Balancer IP"
       }
