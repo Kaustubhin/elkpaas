@@ -189,7 +189,7 @@
               "loadBalancerInboundNatRules": [
                 {
                   "id": "[concat(variables('lbID'),'/inboundNatRules/RDP-VM', copyindex())]",
-                  "id": "[concat(variables('lbID'),'/inboundNatRules/WEB-VM', copyindex())]"
+                  "id": "[concat(variables('lbID'),'/inboundNatRules/WEB-VM', (parameters('vmNamePrefix'))]"
                 }
               ]
             }
@@ -254,18 +254,6 @@
               },
               "protocol": "tcp",
               "frontendPort": 8091,
-              "backendPort": 8081,
-              "enableFloatingIP": false
-            }
-          },
-            {
-            "name": "WEB-VM1",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[variables('frontEndIPConfigID')]"
-              },
-              "protocol": "tcp",
-              "frontendPort": 8092,
               "backendPort": 8081,
               "enableFloatingIP": false
             }
