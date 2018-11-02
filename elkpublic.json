@@ -356,7 +356,7 @@
                 "name": "Install-java",
                 "location": "[resourceGroup().location]",
                 "dependsOn": [
-                    "[concat('Microsoft.Compute/virtualMachines/', (parameters('vmNamePrefix'),copyindex()))]"
+                    "[concat('Microsoft.Compute/virtualMachines/',(parameters('vmNamePrefix'), copyindex()))]"
                 ],
                 "tags": {
                     "displayName": "Install-Java"
