@@ -351,12 +351,12 @@
       },
       "extensions": [
         {
-            "apiVersion": "2018-04-01",
+            "apiVersion": "2016-04-30-preview",
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmNamePrefix'),'/CustomScriptExtension')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'))]"
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'),copyIndex())]"
             ],
              "copy": {
                "name": "extensionLoop",
