@@ -358,6 +358,10 @@
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'))]"
             ],
+             "copy": {
+               "name": "extensionLoop",
+               "count": "[variables('numberOfInstances')]"
+             },
             "tags": {
                 "displayName": "Install-Java"
             },
