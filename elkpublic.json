@@ -360,7 +360,7 @@
         {
             "apiVersion": "2016-04-30-preview",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "Install-Java",
+            "name": "[concat(parameters('vmNamePrefix'),copyIndex(),'/','CustomScriptExtension')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'))]"
