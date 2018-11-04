@@ -379,7 +379,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://github.com/Kaustubhin/elkpaas/blob/master/installjava.ps1"
+                        "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/installjava.ps1"
                     ],
                     "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installjava.ps1"
                 }
