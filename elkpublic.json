@@ -40,6 +40,19 @@
           "description": "Image Publisher"
         }
       },
+      "modulesUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+      }
+    },
+      "configurationFunction": {
+      "type": "string",
+      "defaultValue": "elkhardening.ps1\\elkhardening",
+      "metadata": {
+        "description": "DSC configuration function to call"
+      }
+    },
       "imageOffer": {
         "type": "string",
         "defaultValue": "WindowsServer",
