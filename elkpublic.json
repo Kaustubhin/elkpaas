@@ -44,6 +44,7 @@
       },
       "modulesUrl": {
       "type": "string",
+      "defaultValue": "https://github.com/Kaustubhin/elkpaas/blob/master/xPSDesiredStateConfiguration.zip"
       "metadata": {
         "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
       }
