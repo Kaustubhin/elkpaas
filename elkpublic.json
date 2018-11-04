@@ -100,7 +100,7 @@
       }
     },
     "variables": {
-      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]"
+      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]",
       "storageAccountType": "Standard_LRS",
       "availabilitySetName": "myAvSet",
       "addressPrefix": "10.0.0.0/16",
