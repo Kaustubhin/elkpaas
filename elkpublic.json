@@ -373,33 +373,31 @@
         }
       },
       {
-            "apiVersion": "2016-04-30-preview",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmNamePrefix'),copyIndex(),'/','CustomScriptExtension')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'),copyIndex())]"
-            ],
-             "copy": {
+    "type": "Microsoft.Compute/virtualMachines/extensions",
+    "name": "[concat(parameters('vmName'),'/', 'dscExtension')]",
+    "apiVersion": "2015-05-01-preview",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'),copyIndex())]"
+    ],
+	"copy": {
                "name": "extensionLoop",
                "count": "[variables('numberOfInstances')]"
-             },
-            "tags": {
-                "displayName": "Install-Java"
-            },
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.9",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/installjava.ps1"
-                    ],
-                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installjava.ps1"
-                }
+	},
+    "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.19",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "ModulesUrl": "[parameters('modulesUrl')]",
+          "ConfigurationFunction": "[parameters('configurationFunction')]",
+          "Properties": {
+            "MachineName": "[parameters('vmNamePrefix')]"
           }
-        }
-        
-    ]
+        },
+		"protectedSettings": null
+      }
+}
+]
 }
