@@ -4,6 +4,7 @@
     "parameters": {
       "storageAccountName": {
         "type": "string",
+	"defaultValue ":"eklstorage1234",     
         "metadata": {
           "description": "Name of storage account"
         }
@@ -22,6 +23,7 @@
       },
       "dnsNameforLBIP": {
         "type": "string",
+	"defaultValue": "elkpublb"
         "metadata": {
           "description": "DNS for Load Balancer IP"
         }
