@@ -374,7 +374,7 @@
 "autoUpgradeMinorVersion": true,
 "settings": {
 "configuration": {
-"url": "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elkhardening.ps1",
+"url": "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elkhardening.zip",
 "script": "elkhardening.ps1",
 "function": "elkhardening"
 }
