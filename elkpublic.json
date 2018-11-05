@@ -373,9 +373,10 @@
 "typeHandlerVersion": "2.76",
 "autoUpgradeMinorVersion": true,
 "settings": {
-"configurationArguments": {
-"RegistrationUrl" : "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elkhardening.ps1",
-"NodeConfigurationName" : "parameters('vmNamePrefix')"
+"configuration": {
+"url": "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elkhardening.ps1",
+"script": "elkhardening.ps1",
+"function": "elkhardening"
 }
 }
 }
