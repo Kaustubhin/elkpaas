@@ -2,14 +2,7 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "storageAccountName": {
-        "type": "string",
-	"defaultValue": "eklstorage1234",     
-        "metadata": {
-          "description": "Name of storage account"
-        }
-      },
-      "adminUsername": {
+       "adminUsername": {
         "type": "string",
         "metadata": {
           "description": "Admin username"
@@ -42,21 +35,7 @@
           "description": "Image Publisher"
         }
       },
-      "modulesUrl": {
-      "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/xPSDesiredStateConfiguration.zip",
-      "metadata": {
-        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
-      }
-    },
-      "configurationFunction": {
-      "type": "string",
-      "defaultValue": "elkhardening.ps1\\elkhardening",
-      "metadata": {
-        "description": "DSC configuration function to call"
-      }
-    },
-      "imageOffer": {
+        "imageOffer": {
         "type": "string",
         "defaultValue": "WindowsServer",
         "metadata": {
@@ -107,6 +86,7 @@
       }
     },
     "variables": {
+      "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]",
       "storageAccountType": "Standard_LRS",
       "availabilitySetName": "myAvSet",
       "addressPrefix": "10.0.0.0/16",
@@ -124,7 +104,7 @@
     "resources": [
       {
         "type": "Microsoft.Storage/storageAccounts",
-        "name": "[parameters('storageAccountName')]",
+        "name": "[variables('storageAccountName')]",
         "apiVersion": "2015-05-01-preview",
         "location": "[resourceGroup().location]",
         "properties": {
@@ -333,7 +313,7 @@
         },
         "location": "[resourceGroup().location]",
         "dependsOn": [
-          "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+          "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
           "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
           "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
         ],
@@ -370,15 +350,15 @@
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": "true",
-              "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
+              "storageUri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net')]"
             }
           }
         }
       },
       {
     "type": "Microsoft.Compute/virtualMachines/extensions",
-    "name": "[concat(parameters('vmName'),'/', 'dscExtension')]",
-    "apiVersion": "2015-05-01-preview",
+    "name": "[concat(parameters('vmNamePrefix'),copyIndex(), '/Microsoft.Powershell.DSC')]",
+    "apiVersion": "2018-04-01",
     "location": "[resourceGroup().location]",
     "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/',parameters('vmNamePrefix'),copyIndex())]"
@@ -388,19 +368,18 @@
                "count": "[variables('numberOfInstances')]"
 	},
     "properties": {
-        "publisher": "Microsoft.Powershell",
-        "type": "DSC",
-        "typeHandlerVersion": "2.19",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "ModulesUrl": "[parameters('modulesUrl')]",
-          "ConfigurationFunction": "[parameters('configurationFunction')]",
-          "Properties": {
-            "MachineName": "[parameters('vmNamePrefix')]"
-          }
-        },
-		"protectedSettings": null
-      }
+"publisher": "Microsoft.Powershell",
+"type": "DSC",
+"typeHandlerVersion": "2.76",
+"autoUpgradeMinorVersion": true,
+"settings": {
+"configuration": {
+"url": "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elkhardening.ps1",
+"script": "elkhardening.ps1",
+"function": "elkhardening"
+}
+}
+}
 }
 ]
 }
