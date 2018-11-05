@@ -30,3 +30,4 @@ Node $NodeName
 
   }
 }
+elkhardening
