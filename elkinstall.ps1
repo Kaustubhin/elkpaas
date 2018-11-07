@@ -1,5 +1,11 @@
 
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+Set-NetFirewallProfile -Name Domain -Enabled False
+Start-Sleep 5
+Set-NetFirewallProfile -Name Public -Enabled False
+Start-Sleep 5
+Set-NetFirewallProfile -Name Domain -Enabled False
+
+
 #Create dir to save java
 New-Item -Path c:\tools  -ItemType directory
 #Download Java executable
