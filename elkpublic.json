@@ -251,8 +251,8 @@
                   "id": "[variables('frontEndIPConfigID')]"
                 },
                 "protocol": "tcp",
-                "frontendPort": 8091,
-                "backendPort": 8081,
+                "frontendPort": 8080,
+                "backendPort": 5601,
                 "enableFloatingIP": false
               }
             },
@@ -263,8 +263,8 @@
                   "id": "[variables('frontEndIPConfigID')]"
                 },
                 "protocol": "tcp",
-                "frontendPort": 8092,
-                "backendPort": 8081,
+                "frontendPort": 8081,
+                "backendPort": 5601,
                 "enableFloatingIP": false
               }
             }
