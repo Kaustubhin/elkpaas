@@ -1,3 +1,5 @@
+
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 #Create dir to save java
 New-Item -Path c:\tools  -ItemType directory
 #Download Java executable
