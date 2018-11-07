@@ -11,7 +11,7 @@ $client.Headers.Add([System.Net.HttpRequestHeader]::Cookie, $cookie)
 $client.DownloadFile($source, $destination)
 
 #install silently
-Start-Process -FilePath "c:\test\jdk-8u191-windows-x64.exe" -ArgumentList '/s INSTALL_SILENT=Enable AUTO_UPDATE=Enable SPONSORS=Disable REMOVEOUTOFDATEJRES=1'
+Start-Process -FilePath "c:\tools\jdk-8u191-windows-x64.exe" -ArgumentList '/s INSTALL_SILENT=Enable AUTO_UPDATE=Enable SPONSORS=Disable REMOVEOUTOFDATEJRES=1'
 
 #Sleep till installation completed
 Start-Sleep -Seconds 180
