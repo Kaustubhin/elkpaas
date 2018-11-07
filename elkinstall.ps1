@@ -17,10 +17,10 @@ Start-Process -FilePath "c:\tools\jdk-8u191-windows-x64.exe" -ArgumentList '/s I
 Start-Sleep -Seconds 180
 
 # Set JAVA_HOME
-#[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
-#[Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
-setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
-setx PATH "%JAVA_HOME%\bin;%PATH%"
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
+[Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
+#setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
+#setx PATH "%JAVA_HOME%\bin;%PATH%"
 
 #Create folder and download and extract installables 
 New-Item -Path c:\elk -ItemType directory
@@ -37,7 +37,7 @@ unzip "c:\elk.zip" "c:\elk"
 #Install ELK-Stack silently
 Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat install"
 Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat start"
-Start-sleep 30
+Start-sleep 180
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install logstash c:\elk\elk\logstash\bin\Logstash.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppParameters agent --config C:\elk\elk\logstash\config\logstash-sample.conf"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppDirectory C:\elk\elk\logstash"
@@ -45,8 +45,8 @@ Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppEnvironme
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStdout C:\elk\elk\logstash\logs\stdout.log"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStderr C:\elk\elk\logstash\logs\stderr.log" 
 Invoke-Expression -command "c:\elk\elk\nssm\win64\nssm start logstash"
-Start-Sleep 30
+Start-Sleep 180
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM start kibana"
-Start-Sleep 20
+Start-Sleep 180
 Write-Host "Elk-Stack Installed successfully!!"
