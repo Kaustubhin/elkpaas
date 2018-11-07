@@ -17,9 +17,10 @@ Start-Process -FilePath "c:\test\jdk-8u191-windows-x64.exe" -ArgumentList '/s IN
 Start-Sleep -Seconds 180
 
 # Set JAVA_HOME
-[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
-[Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
-
+#[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
+#[Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
+setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
+setx PATH "%JAVA_HOME%\bin;%PATH%"
 
 #Create folder and download and extract installables 
 New-Item -Path c:\elk -ItemType directory
