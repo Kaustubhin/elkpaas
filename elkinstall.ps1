@@ -6,7 +6,7 @@ Start-Sleep 5
 Set-NetFirewallProfile -Name Domain -Enabled False
 
 
-#Create dir to save java
+<##Create dir to save java
 New-Item -Path c:\tools  -ItemType directory
 #Download Java executable
 $source = "http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-windows-x64.exe"
@@ -26,7 +26,7 @@ Start-Sleep -Seconds 180
 [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
 [Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
 #setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
-#setx PATH "%JAVA_HOME%\bin;%PATH%"
+#setx PATH "%JAVA_HOME%\bin;%PATH%"#>
 
 #Create folder and download and extract installables 
 New-Item -Path c:\elk -ItemType directory
@@ -41,7 +41,7 @@ unzip "c:\elk.zip" "c:\elk"
 
 
 #Install ELK-Stack silently
-Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat install"
+<#Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat install"
 Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat start"
 Start-sleep 180
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install logstash c:\elk\elk\logstash\bin\Logstash.bat"
@@ -51,7 +51,7 @@ Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppEnvironme
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStdout C:\elk\elk\logstash\logs\stdout.log"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStderr C:\elk\elk\logstash\logs\stderr.log" 
 Invoke-Expression -command "c:\elk\elk\nssm\win64\nssm start logstash"
-Start-Sleep 180
+Start-Sleep 180#>
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM start kibana"
 Start-Sleep 180
