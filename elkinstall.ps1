@@ -1,9 +1,7 @@
-
+Set-ExecutionPolicy unrestricted -Force
 Set-NetFirewallProfile -Name Domain -Enabled False
-Start-Sleep 5
 Set-NetFirewallProfile -Name Public -Enabled False
-Start-Sleep 5
-Set-NetFirewallProfile -Name Domain -Enabled False
+Set-NetFirewallProfile -Name Private -Enabled False
 
 
 <##Create dir to save java
