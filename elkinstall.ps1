@@ -42,14 +42,14 @@ unzip "c:\elk.zip" "c:\elk"
 Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat install"
 Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat start"
 Start-sleep 10
-Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install logstash c:\elk\elk\logstash\bin\Logstash.bat"
+<#Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install logstash c:\elk\elk\logstash\bin\Logstash.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppParameters agent --config C:\elk\elk\logstash\config\logstash-sample.conf"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppDirectory C:\elk\elk\logstash"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppEnvironmentExtra 'Java_HOME=C:\Program Files\Java\jdk1.8.0_191'"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStdout C:\elk\elk\logstash\logs\stdout.log"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStderr C:\elk\elk\logstash\logs\stderr.log" 
 Invoke-Expression -command "c:\elk\elk\nssm\win64\nssm start logstash"
-Start-Sleep 10
+Start-Sleep 10#>
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM start kibana"
 Start-Sleep 10
