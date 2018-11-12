@@ -27,7 +27,7 @@ Start-Sleep -Seconds 30
 #setx PATH "%JAVA_HOME%\bin;%PATH%"#>
 
 #Create folder and download and extract installables 
-New-Item -Path c:\elk -ItemType directory
+#New-Item -Path c:\elk -ItemType directory
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 Start-BitsTransfer -Source "https://elktools.blob.core.windows.net/tools/elk.zip" -Destination "C:\"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -35,12 +35,12 @@ function unzip {
 param( [string]$ziparchive, [string]$extractpath )
 [System.IO.Compression.ZipFile]::ExtractToDirectory( $ziparchive, $extractpath )
 }
-unzip "c:\elk.zip" "c:\elk"
+unzip "c:\elk.zip" "c:\"
 
 
 #Install ELK-Stack silently
-Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat install"
-Invoke-Expression -command "c:\elk\elk\elasticsearch\bin\elasticsearch-service.bat start"
+Invoke-Expression -command "c:\ek\elasticsearch\bin\elasticsearch-service.bat install"
+Invoke-Expression -command "c:\ek\elasticsearch\bin\elasticsearch-service.bat start"
 Start-sleep 10
 <#Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install logstash c:\elk\elk\logstash\bin\Logstash.bat"
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppParameters agent --config C:\elk\elk\logstash\config\logstash-sample.conf"
@@ -50,7 +50,7 @@ Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStdout C:
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStderr C:\elk\elk\logstash\logs\stderr.log" 
 Invoke-Expression -command "c:\elk\elk\nssm\win64\nssm start logstash"
 Start-Sleep 10#>
-Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
-Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM start kibana"
+Invoke-Expression -command "c:\ek\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
+Invoke-Expression -command "c:\ek\nssm\win64\NSSM start kibana"
 Start-Sleep 10
 Write-Host "Elk-Stack Installed successfully!!"
