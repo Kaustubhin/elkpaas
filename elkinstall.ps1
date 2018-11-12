@@ -21,8 +21,8 @@ Start-Process -FilePath "c:\tools\jdk-8u191-windows-x64.exe" -ArgumentList '/s I
 Start-Sleep -Seconds 30
 
 # Set JAVA_HOME
-[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
-#[Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
+[System.Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
 #setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
 #setx PATH "%JAVA_HOME%\bin;%PATH%"#>
 
