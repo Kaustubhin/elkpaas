@@ -29,7 +29,7 @@ Start-Sleep -Seconds 30
 #Create folder and download and extract installables 
 #New-Item -Path c:\elk -ItemType directory
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-Start-BitsTransfer -Source "https://elktools.blob.core.windows.net/tools/elk.zip" -Destination "C:\"
+Start-BitsTransfer -Source "https://elktools.blob.core.windows.net/tools/ek.zip" -Destination "C:\"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function unzip {
 param( [string]$ziparchive, [string]$extractpath )
