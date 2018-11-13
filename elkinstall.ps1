@@ -35,7 +35,7 @@ function unzip {
 param( [string]$ziparchive, [string]$extractpath )
 [System.IO.Compression.ZipFile]::ExtractToDirectory( $ziparchive, $extractpath )
 }
-unzip "c:\ek.zip" "c:\ek"
+unzip "c:\ek.zip" "c:\"
 
 
 #Install ELK-Stack silently
