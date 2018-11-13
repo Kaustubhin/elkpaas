@@ -22,7 +22,7 @@ Start-Sleep -Seconds 30
 
 # Set JAVA_HOME
 [System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
-[System.Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
+#[System.Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
 #setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
 #setx PATH "%JAVA_HOME%\bin;%PATH%"#>
 
@@ -35,7 +35,7 @@ function unzip {
 param( [string]$ziparchive, [string]$extractpath )
 [System.IO.Compression.ZipFile]::ExtractToDirectory( $ziparchive, $extractpath )
 }
-unzip "c:\elk.zip" "c:\"
+unzip "c:\ek.zip" "c:\ek"
 
 
 #Install ELK-Stack silently
