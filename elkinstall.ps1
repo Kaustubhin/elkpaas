@@ -21,14 +21,14 @@ Start-Process -FilePath "c:\tools\jdk-8u191-windows-x64.exe" -ArgumentList '/s I
 Start-Sleep -Seconds 30
 
 # Set JAVA_HOME
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191")
-#[System.Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_191\jre")
+[System.Environment]::SetEnvironmentVariable("PATH", "%JAVA_HOME%\bin;%PATH%")
 #setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_191"
 #setx PATH "%JAVA_HOME%\bin;%PATH%"#>
 
 #Create folder and download and extract installables 
 #New-Item -Path c:\elk -ItemType directory
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+Set-NetFirewallProfile -Profile Public,Domain,Private -Enabled False
 Start-BitsTransfer -Source "https://elktools.blob.core.windows.net/tools/ek.zip" -Destination "C:\"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function unzip {
@@ -36,6 +36,7 @@ param( [string]$ziparchive, [string]$extractpath )
 [System.IO.Compression.ZipFile]::ExtractToDirectory( $ziparchive, $extractpath )
 }
 unzip "c:\ek.zip" "c:\"
+Start-Sleep 150
 
 
 #Install ELK-Stack silently
@@ -50,7 +51,7 @@ Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStdout C:
 Invoke-Expression -command "c:\elk\elk\nssm\win64\NSSM set logstash AppStderr C:\elk\elk\logstash\logs\stderr.log" 
 Invoke-Expression -command "c:\elk\elk\nssm\win64\nssm start logstash"
 Start-Sleep 10#>
-Invoke-Expression -command "c:\ek\nssm\win64\NSSM install kibana c:\elk\elk\kibana\bin\kibana.bat"
+Invoke-Expression -command "c:\ek\nssm\win64\NSSM install kibana c:\ek\kibana\bin\kibana.bat"
 Invoke-Expression -command "c:\ek\nssm\win64\NSSM start kibana"
 Start-Sleep 10
 Write-Host "Elk-Stack Installed successfully!!"
