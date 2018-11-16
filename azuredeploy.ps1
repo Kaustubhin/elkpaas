@@ -6,9 +6,9 @@ Write-Host "Enter the Username and Password for VM"
 
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg `
 -TemplateFile "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elastickkibana.json"
+Start-Sleep 60 
 
-
-# Add Custom extension to Install Elk-Stack on VM1 
+<## Add Custom extension to Install Elk-Stack on VM1 
 Set-AzureRmVMCustomScriptExtension -ResourceGroupName $rg `
      -VMName EK01 `
      -Location "Central US" `
