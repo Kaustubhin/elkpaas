@@ -1,10 +1,10 @@
 $rg="KO002"
 
-New-AzureRmResourceGroup -Name $rg -Location "Central US"
+New-AzResourceGroup -Name $rg -Location "Central US"
 
 Write-Host "Enter the Username and Password for VM"
 
-New-AzureRmResourceGroupDeployment -ResourceGroupName $rg `
+New-AzResourceGroupDeployment -ResourceGroupName $rg `
 -TemplateFile "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/elastickkibana.json"
 Start-Sleep 60 
 
