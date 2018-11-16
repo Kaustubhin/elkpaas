@@ -145,8 +145,8 @@
 				  "typeHandlerVersion": "2.0",
 				  "autoUpgradeMinorVersion": true,
 				  "settings": {
-					"fileUris": [],
-					"commandToExecute": ""
+					"fileUris": ["https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/install.sh"],
+					"commandToExecute": "./install.sh"
 				  }				  
 				}
 			}

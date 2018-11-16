@@ -13,4 +13,7 @@ add-apt-repository \
    stable"
 apt-get update
 apt-get install docker-ce
-docker-compose up elk
+mkdir -p /opt/elk
+wget -P /opt/elk "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/docker-compose.yml"
+cd /opt/elk
+docker-compose up -d elk
