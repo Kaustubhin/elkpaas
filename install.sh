@@ -17,4 +17,5 @@ curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compos
 chmod +x /usr/local/bin/docker-compose
 mkdir -p /opt/elk
 wget -P /opt/elk "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/docker-compose.yml"
+sysctl -w vm.max_map_count=262144
 cd /opt/elk && docker-compose up -d elk
