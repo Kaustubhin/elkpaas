@@ -14,7 +14,7 @@
 				"description": "Password for the Virtual Machine."
 			}
 		},
-			"location": {
+		"location": {
 			"type": "string",
 			"defaultValue": "[resourceGroup().location]",
 			"metadata": {
@@ -31,12 +31,10 @@
 		"vmName": "EK01",
 		"virtualNetworkName": "koarmVNET",
 		"publicIPAddressName": "koarmpublic",
-
-
 		"dnsNameForPublicIP": "kokibana"
-
 	},
-	"resources": [{
+	"resources": [
+		{
 			"apiVersion": "2017-06-01",
 			"type": "Microsoft.Network/publicIPAddresses",
 			"name": "[variables('publicIPAddressName')]",
@@ -59,12 +57,14 @@
 						"[variables('addressPrefix')]"
 					]
 				},
-				"subnets": [{
-					"name": "[variables('subnetName')]",
-					"properties": {
-						"addressPrefix": "[variables('subnetPrefix')]"
+				"subnets": [
+					{
+						"name": "[variables('subnetName')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrefix')]"
+						}
 					}
-				}]
+				]
 			}
 		},
 		{
@@ -77,18 +77,20 @@
 				"[variables('virtualNetworkName')]"
 			],
 			"properties": {
-				"ipConfigurations": [{
-					"name": "ipconfig1",
-					"properties": {
-						"privateIPAllocationMethod": "Dynamic",
-						"publicIPAddress": {
-							"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
-						},
-						"subnet": {
-							"id": "[variables('subnetRef')]"
+				"ipConfigurations": [
+					{
+						"name": "ipconfig1",
+						"properties": {
+							"privateIPAllocationMethod": "Dynamic",
+							"publicIPAddress": {
+								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+							},
+							"subnet": {
+								"id": "[variables('subnetRef')]"
+							}
 						}
 					}
-				}]
+				]
 			}
 		},
 		{
@@ -110,7 +112,6 @@
 				},
 				"storageProfile": {
 					"imageReference": {
-
 						"publisher": "Canonical",
 						"offer": "UbuntuServer",
 						"sku": "16.04-LTS",
@@ -119,45 +120,46 @@
 					"osDisk": {
 						"name": "UbuntuVM1-OSDisk",
 						"caching": "ReadWrite",
-
-
 						"createOption": "FromImage"
 					}
 				},
 				"networkProfile": {
-					"networkInterfaces": [{
-						"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
-					}]
+					"networkInterfaces": [
+						{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+						}
+					]
 				}
 			},
-
-			"resources": [ {
-				"type": "Microsoft.Compute/virtualMachines/extensions",
-				"name": "[concat(variables('vmName'),'/','extensions')]",
-				"apiVersion": "2017-03-30",
-				"location": "[parameters('location')]",
-				"dependsOn": [
-				  "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-				],
-				"properties": {
-				  "publisher": "Microsoft.Azure.Extensions",
-				  "type": "CustomScript",
-				  "typeHandlerVersion": "2.0",
-				  "autoUpgradeMinorVersion": true,
-				  "settings": {
-					"fileUris": ["https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/install.sh"],
-					"commandToExecute": "./install.sh"
-				  }				  
+			"resources": [
+				{
+					"type": "Microsoft.Compute/virtualMachines/extensions",
+					"name": "[concat(variables('vmName'),'/','extensions')]",
+					"apiVersion": "2017-03-30",
+					"location": "[parameters('location')]",
+					"dependsOn": [
+						"[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+					],
+					"properties": {
+						"publisher": "Microsoft.Azure.Extensions",
+						"type": "CustomScript",
+						"typeHandlerVersion": "2.0",
+						"autoUpgradeMinorVersion": true
+					},
+					"protectedSettings": {
+						"fileUris": [
+							"https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/install.sh"
+						],
+						"commandToExecute": "sh install.sh"
+					}
 				}
-			}
-
-]
-}
-],
+			]
+		}
+	],
 	"outputs": {
 		"vm-fqdn": {
 			"type": "string",
 			"value": "[reference(variables('publicIPAddressName'), '2016-03-30').dnsSettings.fqdn]"
 		}
-	}}
-
+	}
+}
