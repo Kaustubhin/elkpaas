@@ -144,13 +144,13 @@
 						"publisher": "Microsoft.Azure.Extensions",
 						"type": "CustomScript",
 						"typeHandlerVersion": "2.0",
-						"autoUpgradeMinorVersion": true
-					},
-					"protectedSettings": {
-						"fileUris": [
-							"https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/install.sh"
-						],
-						"commandToExecute": "sh install.sh"
+						"autoUpgradeMinorVersion": true,
+						"Settings": {
+							"fileUris": [
+								"https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/install.sh"
+							],
+							"commandToExecute": "sh install.sh"
+						}
 					}
 				}
 			]
