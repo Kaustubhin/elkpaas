@@ -13,6 +13,8 @@ add-apt-repository \
    stable"
 apt-get update
 apt-get install docker-ce -y
+curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 mkdir -p /opt/elk
 wget -P /opt/elk "https://raw.githubusercontent.com/Kaustubhin/elkpaas/master/docker-compose.yml"
-cd /opt/elk && docker-compose -f docker-compose.yml up -d elk
+cd /opt/elk && docker-compose up -d elk
