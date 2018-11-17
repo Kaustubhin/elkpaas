@@ -1,4 +1,4 @@
-$rg="KO001"
+$rg="KO002"
 
 New-AzResourceGroup -Name $rg -Location "Central US"
 
