@@ -31,9 +31,34 @@
 		"vmName": "EK01",
 		"virtualNetworkName": "koarmVNET",
 		"publicIPAddressName": "koarmpublic",
-		"dnsNameForPublicIP": "kokibana"
+		"dnsNameForPublicIP": "kokibana",
+		"networkSecurityGroupName": "konsg"
 	},
 	"resources": [
+		{
+			"apiVersion": "2015-06-15",
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"name": "[variables('networkSecurityGroupName')]",
+			"location": "[parameters('location')]",
+			"properties": {
+				"securityRules": [
+					{
+						"name": "kibana_rule",
+						"properties": {
+							"description": "This is the Kibana rule",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "22-5601",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 123,
+							"direction": "Inbound"
+						}
+					}
+				]
+			}
+		},
 		{
 			"apiVersion": "2017-06-01",
 			"type": "Microsoft.Network/publicIPAddresses",
@@ -51,6 +76,9 @@
 			"type": "Microsoft.Network/virtualNetworks",
 			"name": "[variables('virtualNetworkName')]",
 			"location": "[parameters('location')]",
+			"dependsOn": [
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
+			],
 			"properties": {
 				"addressSpace": {
 					"addressPrefixes": [
@@ -61,7 +89,10 @@
 					{
 						"name": "[variables('subnetName')]",
 						"properties": {
-							"addressPrefix": "[variables('subnetPrefix')]"
+							"addressPrefix": "[variables('subnetPrefix')]",
+							"networkSecurityGroup": {
+								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+							}
 						}
 					}
 				]
